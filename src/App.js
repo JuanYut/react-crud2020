@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
+// * Components
+import TransactionList from './components/TransactionList_component';
 
 function App() {
-  return (
-    <div className='App'>
-      <h2>Hola</h2>
-    </div>
-  );
+  return <TransactionList></TransactionList>;
 }
 
 export default App;
