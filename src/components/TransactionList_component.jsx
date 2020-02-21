@@ -27,6 +27,13 @@ class TransactionList extends Component {
     });
   };
 
+  handleDelete = index => {
+    var list = this.returnList();
+    list.splice(index, 1);
+    localStorage.setItem('transactions', JSON.stringify(list));
+    this.setState({ list, currentIndex: -1 });
+  };
+
   render() {
     return (
       <div>
@@ -46,6 +53,9 @@ class TransactionList extends Component {
                   <td>{item.amount}</td>
                   <td>
                     <button onClick={() => this.handleEdit(index)}>Edit</button>
+                    <button onClick={() => this.handleDelete(index)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
