@@ -3,6 +3,7 @@ import TransactionForm from './TransactionForm_component';
 
 class TransactionList extends Component {
   state = {
+    currentIndex: -1,
     list: this.returnList()
   };
 
@@ -19,12 +20,37 @@ class TransactionList extends Component {
     this.setState({ list });
   };
 
+  handleEdit = index => {
+    this.setState({
+      currentIndex: index
+    });
+  };
+
   render() {
     return (
       <div>
-        <TransactionForm onAddOrEdit={this.onAddOrEdit} />
+        <TransactionForm
+          onAddOrEdit={this.onAddOrEdit}
+          currentIndex={this.state.currentIndex}
+          list={this.state.list}
+        />
         <hr />
-        <p>List of transactions:</p>
+        <table>
+          <tbody>
+            {this.state.list.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item.bAccountNo}</td>
+                  <td>{item.bName}</td>
+                  <td>{item.amount}</td>
+                  <td>
+                    <button onClick={() => this.handleEdit(index)}>Edit</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
