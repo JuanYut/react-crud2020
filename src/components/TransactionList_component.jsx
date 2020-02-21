@@ -15,9 +15,10 @@ class TransactionList extends Component {
 
   onAddOrEdit = data => {
     var list = this.returnList();
-    list.push(data);
+    if (this.state.currentIndex == -1) list.push(data);
+    else list[this.state.currentIndex] = data;
     localStorage.setItem('transactions', JSON.stringify(list));
-    this.setState({ list });
+    this.setState({ list, currentIndex: -1 });
   };
 
   handleEdit = index => {
